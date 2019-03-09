@@ -40,7 +40,7 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Header from '../components/layout/Header.vue';
-import Todos from '../components/Todos.vue';
+import Forums from '../components/Forums.vue';
 import AddTodo from '../components/AddTodo.vue';
 import axios from 'axios';
 
@@ -48,7 +48,7 @@ export default {
   name: 'Home',
   components: {
     Header,
-    Todos,
+    Forums,
     AddTodo,
     // HelloWorld
   },
