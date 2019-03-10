@@ -1,9 +1,10 @@
 <template>
     <div>
         <!-- <h1>Todos</h1> -->
-        <div v-bind:key="todo.id" v-for="todo in todos">
+        <div v-bind:key="forum.id" v-for="forum in forums">
             <!-- <h3>{{todo.title}}</h3> -->
-            <ForumItem v-bind:todo="todo" @del-todo="$emit('del-todo', todo.id)"/>
+            
+            <ForumItem v-bind:forum="forum" @del-forum="$emit('del-forum', forum.id)"/>
         </div>
     </div>
 </template>
@@ -12,11 +13,11 @@
 import ForumItem from './ForumItem.vue';
 
 export default {
-    name: "Todos", // component names
+    name: "Forums", // component names
     components: {
         ForumItem
     },
-    props: ["todos"],
+    props: ["forums"],
     methods: {
         test() {
             console.log('asdasdas');

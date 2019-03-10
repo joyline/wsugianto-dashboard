@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <h1>This is Register Page ABCDE</h1>
+    <h1>This is Register Page</h1>
     <form action="" method="post">
       first name: <input type="text"  v-model="firstName"> 
       <br>
@@ -82,9 +82,9 @@ export default {
         axios.post('http://localhost:3000/register',
         qs.stringify(newUser), config
         )
-        location.reload()
+        // location.reload()
       } else {
-        location.reload()
+        // location.reload()
         return "false"
       }
     },

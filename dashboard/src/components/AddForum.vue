@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form v-if="logged() == true" @submit="addTodo" action="">
+        <form v-if="logged() == true" @submit="addForum" action="">
             <h2>add forum</h2>
             <input v-if="logged() == true" type="text" v-model="title" name="title" placeholder="forum title">
             <!-- <a href="http://"></a> -->
@@ -13,7 +13,7 @@
 <script>
 // import uuid from 'uuid';
 export default {
-    name: "AddTodo",
+    name: "AddForum",
     data() {
         return {
             title: ''
@@ -23,18 +23,19 @@ export default {
 
     },
     methods: {
-        addTodo(e){
+        addForum(e){
             e.preventDefault();
             
-            const newforum = {
+            const newForum = {
                 // id: uuid.v4(),
                 forumName: this.title,
                 forumDescription: this.description,
-                userId: a,
+                // userId: 1,
             }
             // send up to parent
-            this.$emit('add-todo', newTodo);
-            this.title ="";
+            console.log("AAA",newForum)
+            this.$emit('add-forum', newForum);
+            // this.title ="";
         },
         logged() {
             console.log(localStorage.getItem('secretkey') != null)

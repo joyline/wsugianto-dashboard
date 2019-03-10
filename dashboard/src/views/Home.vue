@@ -22,8 +22,8 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- {{msg}} -->
     <Header />
-    <AddTodo v-on:add-todo="addTodo" />
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" /> 
+    <AddForum v-on:add-forum="addForum" />
+    <Forums v-bind:forums="forums" v-on:del-forum="deleteForum" /> 
     
     <!-- header -->
         <!-- add post -->
@@ -41,7 +41,7 @@
 // import HelloWorld from './components/HelloWorld.vue'
 import Header from '../components/layout/Header.vue';
 import Forums from '../components/Forums.vue';
-import AddTodo from '../components/AddTodo.vue';
+import AddForum from '../components/AddForum.vue';
 import axios from 'axios';
 
 export default {
@@ -49,12 +49,12 @@ export default {
   components: {
     Header,
     Forums,
-    AddTodo,
+    AddForum,
     // HelloWorld
   },
   data() {
     return {
-      todos: [
+      forums: [
         // {
         //   id: 1,
         //   title: "todo 1",
@@ -77,17 +77,17 @@ export default {
     deleteTodo(id){
       console.log('Home', id);
       axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
+      .then(res => this.forums = this.forums.filter(forum => forum.id !== id))
       .catch(err => console.log(err))
       // this.todos = this.todos.filter(todo => todo.id !== id);
     },
-    addTodo(newTodo){
-      const {title, completed} = newTodo;
+    addForum(newForum){
+      const {title, completed} = newForum;
       axios.post('https://jsonplaceholder.typicode.com/todos', {
         title,
         completed
         })
-        .then(res => this.todos = [...this.todos, res.data])
+        .then(res => this.forums = [...this.forums, res.data])
         .catch(err => console.log(err))
       // this.todos = [...this.todos, newTodo];
     },
@@ -103,9 +103,18 @@ export default {
 
   },
   created() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
-    .then(res => this.todos=res.data)
+    axios.get('http://localhost:3000/get-all-post')
+    .then(res => {
+      console.log(res.data)
+      this.forums = res.data
+    })
     .catch(err => console.log(err))
+    // axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+    // .then(res => {
+    //   console.log(res.data)
+    //   this.forums=res.data
+    // })
+    // .catch(err => console.log(err))
   },
 
 }

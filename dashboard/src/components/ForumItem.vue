@@ -1,15 +1,28 @@
 <template>
-    <div class="todo-item" v-bind:class="{'is-complete': todo.completed}">
+    <div class="forum-item" v-bind:class="{'is-complete': forum.completed}">
         <!-- <p>Todo Item</p> -->
         <p>
             <!-- <input type="checkbox" name="" id="" v-on:change="markComplete"> -->
-            {{todo.title}}
+            <h2> title: {{forum.forumName}}</h2>
+            <h5> description: {{forum.forumDescription}}</h5>
+            <!-- {{forum.connectForumTags}} -->
+            <h5>
+                Created By:
+                {{forum.User.firstName}}
+                {{forum.User.lastName}}
+            </h5>
+            
             <!-- query forum -->
+            <!-- forum description -->
+
             <!-- query comment -->
-            <!-- validate button for logged in user -->
-            <button @click="$emit('del-todo', todo.id)" class="del">Delete</button>
-            <button @click="$emit('del-todo', todo.id)" class="del">Update</button>
-            <br> Add Comment Here: <input type="text" name="" id="">
+            <button v-if="logged() == true" @click="$emit('del-forum', forum.id)" class="del">Delete</button>
+            <button v-if="logged() == true" @click="$emit('del-forum', forum.id)" class="del">Update</button>
+            <br> 
+
+            <span v-if="logged() == true">Add Comment Here: </span> <input v-if="logged() == true" type="text" name="" id="">
+            <!-- <a href=""> <button type="submit"> Post Comment </button>  </a> -->
+            <a v-if="logged() == true" href="">Post Comment</a>
             <!-- where user create comment -->
         </p>
     </div>
@@ -18,18 +31,26 @@
 <script>
 export default {
     name: "ForumItem",
-    props:["todo"],
+    props:["forum"],
     methods: {
         markComplete() {
-            this.todo.completed = !this.todo.completed
+            this.forum.completed = !this.forum.completed
             // console.log(123)
-        }
+        },
+        logged() {
+            console.log(localStorage.getItem('secretkey') != null)
+            if(localStorage.getItem('secretkey') != null) {
+                return true
+            } else {
+                return false
+            }
+    },
     },
 }
 </script>
 
 <style scoped>
-    .todo-item {
+    .forum-item {
         background: #f4f4f4;
         padding: 10px;
         border-bottom: 1px #ccc dotted;

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h1>This is Login Page ABC</h1>
+    <h1>This is Login Page </h1>
     <form action="" method="post">
       email: <input type="email" name="" id="email" placeholder="email"  v-model="emails">
       <br>
