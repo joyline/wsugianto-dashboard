@@ -11,10 +11,12 @@
                 {{forum.User.firstName}}
                 {{forum.User.lastName}}
             </h5>
-            
+            <h5>Post Tags: <button v-for="i in tags" :key="i.Tag.id"> {{i.Tag.tagName}}</button> </h5>
+            <!-- <h5>Comments:: <span v-for="i in comments" :key="i.Comments.id"></span></h5> -->
             <!-- query forum -->
             <!-- forum description -->
-
+            <h5>Comments: <br> <span v-for="j in comments" :key="j.Comment"> {{j.message}} <br> </span></h5>
+            <!-- <button @click="test()">aaaa</button> -->
             <!-- query comment -->
             <button v-if="logged() == true" @click="$emit('del-forum', forum.id)" class="del">Delete</button>
             <button v-if="logged() == true" @click="$emit('del-forum', forum.id)" class="del">Update</button>
@@ -32,6 +34,12 @@
 export default {
     name: "ForumItem",
     props:["forum"],
+    data() {
+        return {
+            tags: this.forum.ConnectForumTags,
+            comments: this.forum.Comments,
+        }
+    },
     methods: {
         markComplete() {
             this.forum.completed = !this.forum.completed
@@ -44,7 +52,17 @@ export default {
             } else {
                 return false
             }
-    },
+        },
+        comments() {
+            {{forum.Comments}}
+        },
+        tags() {
+
+        },
+        test() {
+            // console.log(this.tags)
+            console.log(this.comments)
+        }
     },
 }
 </script>
